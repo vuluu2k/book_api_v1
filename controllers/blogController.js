@@ -11,7 +11,7 @@ class blogController {
 
     try {
       const image_response = await cloudinaryV2.uploader.upload(image, {
-        upload_preset: 'PhoneTopBlog',
+        upload_preset: 'book_v1_blog',
         eager: { width: 2134, height: 1200, crop: 'pad' },
       });
       const newBlog = new blog({
