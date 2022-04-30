@@ -40,7 +40,7 @@ class productController {
   }
 
   async getProduct(req, res) {
-    const { product_id, name, value, status, category, sub_category, page_number = 1, page_size = 10 } = req.query;
+    const { product_id, name, value, status, category, sub_category, page_number = 1, page_size = 100 } = req.query;
 
     try {
       const listProduct = await product
@@ -103,7 +103,7 @@ class productController {
       const sp4 = await product.find({ category: categorys[3]?._id  }).sort({ updatedAt: 'desc' }).limit(6);
       const sp5 = await product.find({ category: categorys[4]?._id  }).sort({ updatedAt: 'desc' }).limit(18);
 
-      res.json({ success: true, message: 'Tải Home thành công', hot: productHot, sp1, sp2, sp3, sp4, sp5 });
+      res.json({ success: true, message: 'Tải Home thành công', hot: productHot, sp1, sp2, sp3, sp4, sp5,name1:categorys[0]?.name_vi,name2:categorys[1]?.name_vi,name3:categorys[2]?.name_vi,name4:categorys[3]?.name_vi,name5:categorys[4]?.name_vi });
     } catch (error) {
       console.log(error);
       res.status(500).json({ success: false, message: 'Lỗi máy chủ nội bộ' });
