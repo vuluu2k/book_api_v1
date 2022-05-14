@@ -5,10 +5,17 @@ import dayjs from 'dayjs';
 
 class packageControlller {
   async getPackage(req, res) {
-    const { isAccess } = req.query;
+    const { isAccess, userId } = req.query;
+
+    console.log(userId);
     try {
       const view_package = await packages
-        .find({ $and: [(isAccess && isAccess !== String(undefined) && { isAccess }) || {}] })
+        .find({
+          $and: [
+            (isAccess && isAccess !== String(undefined) && { isAccess }) || {},
+            (userId && userId !== String(undefined) && { user_id: userId }) || {},
+          ],
+        })
         .sort({ updatedAt: 'desc' });
       if (!view_package) {
         return res.json({ success: false, message: 'Không có dữ liệu đơn hàng', view_package });
